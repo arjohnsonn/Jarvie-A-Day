@@ -15,6 +15,7 @@
 		875A245B2C35378900A09B7B /* Jarvie_A_DayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A245A2C35378900A09B7B /* Jarvie_A_DayUITests.swift */; };
 		875A245D2C35378900A09B7B /* Jarvie_A_DayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A245C2C35378900A09B7B /* Jarvie_A_DayUITestsLaunchTests.swift */; };
 		87645A5D2C354E0200A1BCCB /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87645A5C2C354E0200A1BCCB /* SplashScreenView.swift */; };
+		87B104832C71C0C7004DC7AE /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 87B104822C71C0C7004DC7AE /* ConfettiSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87B104832C71C0C7004DC7AE /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = "Jarvie A Day";
+			packageProductDependencies = (
+				87B104822C71C0C7004DC7AE /* ConfettiSwiftUI */,
+			);
 			productName = "Jarvie A Day";
 			productReference = 875A243C2C35378900A09B7B /* Jarvie A Day.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 875A24332C35378900A09B7B;
+			packageReferences = (
+				87B104812C71C0C7004DC7AE /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			productRefGroup = 875A243D2C35378900A09B7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -586,6 +594,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		87B104812C71C0C7004DC7AE /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		87B104822C71C0C7004DC7AE /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87B104812C71C0C7004DC7AE /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 875A24342C35378900A09B7B /* Project object */;
 }

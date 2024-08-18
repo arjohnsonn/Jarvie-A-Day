@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct ContentView: View {
-    @State private var Start: Bool = false
-    @State private var Shaken: Bool = false
+    @State private var start: Bool = false
+    @State private var shaken: Bool = false
+    @State private var isShaking: Bool = false
     
-    @State private var CenterImage: String = "Gift Box"
-    @State private var ImageOpacity = 1
+    @State private var centerImage: String = "Gift Box"
+    @State private var imageOpacity = 1
+    @State private var buttonOpacity = 1
     
-    @State private var ButtonOpacity = 1
+    @State private var confettiCount = 0
     
-    @State private var ConfettiCount = 0
+    static var maxImages = 2
+    let images = (1...maxImages).map { String($0) }
     
     var body: some View {
         VStack(spacing: 10, content: {
@@ -24,24 +28,68 @@ struct ContentView: View {
             
             Spacer()
             
-            Image(CenterImage)
+            Image(centerImage)
                 .resizable()
                 .frame(width: 240, height: 240)
                 .scaledToFit()
                 .padding(40)
                 .shadow(radius: 22)
-                .offset(x: Start ? 30 : 0)
-                .opacity(Double(ImageOpacity))
+                .offset(x: start ? 30 : 0)
+                .opacity(Double(imageOpacity))
+                .offset(x: isShaking ? 20 : 0)
+                .confettiCannon(counter: $confettiCount, num: 100)
                 
             Spacer()
             
             Button("Open") {
-                
+                reveal()
             }
+            .padding(.horizontal, 30)
+            .padding(.vertical, 10)
             .foregroundColor(.white)
             .background(.blue)
-            .cornerRadius(16.0)
+            .cornerRadius(24.0)
+            .bold()
+            .font(.system(size: 25))
+            .opacity(Double(buttonOpacity))
         })
+    }
+    
+    func reveal() {
+        openPress()
+    }
+    
+    func changeImage() {
+        if let randomImage = images.randomElement() {
+            centerImage = randomImage
+        }
+    }
+    
+    func openPress() {
+        withAnimation(Animation.linear(duration: 0.1).repeatCount(40, autoreverses: true)) {
+            isShaking = true
+          }
+          
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation(Animation.linear(duration: 2.0)) {
+                imageOpacity = 0
+                buttonOpacity = 0
+            }
+        }
+          
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            isShaking = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            changeImage()
+            
+            withAnimation(Animation.linear(duration: 0.5)) {
+                imageOpacity = 1
+            }
+            
+            confettiCount += 1
+        }
     }
 }
 
