@@ -23,36 +23,42 @@ struct ContentView: View {
     let images = (1...maxImages).map { String($0) }
     
     var body: some View {
-        VStack(spacing: 10, content: {
-            Text("Jarvie A Day").bold().font(.system(size: 40))
-            
-            Spacer()
-            
-            Image(centerImage)
-                .resizable()
-                .frame(width: 240, height: 240)
-                .scaledToFit()
-                .padding(40)
-                .shadow(radius: 22)
-                .offset(x: start ? 30 : 0)
-                .opacity(Double(imageOpacity))
-                .offset(x: isShaking ? 20 : 0)
-                .confettiCannon(counter: $confettiCount, num: 100)
+        NavigationView {
+            VStack(spacing: 10, content: {
+                Text("Jarvie A Day").bold().font(.system(size: 40))
                 
-            Spacer()
-            
-            Button("Open") {
-                reveal()
-            }
-            .padding(.horizontal, 30)
-            .padding(.vertical, 10)
-            .foregroundColor(.white)
-            .background(.blue)
-            .cornerRadius(24.0)
-            .bold()
-            .font(.system(size: 25))
-            .opacity(Double(buttonOpacity))
-        })
+                Spacer()
+                
+                Image(centerImage)
+                    .resizable()
+                    .frame(width: 240, height: 240)
+                    .scaledToFit()
+                    .padding(40)
+                    .shadow(radius: 22)
+                    .offset(x: start ? 30 : 0)
+                    .opacity(Double(imageOpacity))
+                    .offset(x: isShaking ? 20 : 0)
+                    .confettiCannon(counter: $confettiCount, num: 100)
+                    
+                Spacer()
+                
+                Button("Open") {
+                    reveal()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 5)
+                .foregroundColor(.white)
+                .background(.blue)
+                .cornerRadius(24.0)
+                .bold()
+                .font(.system(size: 25))
+                .opacity(Double(buttonOpacity))
+            })
+            .navigationBarItems(trailing: NavigationLink(destination: SettingsView()) {
+                Image(systemName: "gear")
+                    .imageScale(.large)
+            })
+        }
     }
     
     func reveal() {
