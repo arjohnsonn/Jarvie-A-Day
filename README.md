@@ -8,4 +8,5 @@ Features:
 - Surprise Factor
 - Confetti on Reveal
 - Settings
-  - Daily Notification Time
+  - Disable/Enable Daily Notifications
+  - Configure Daily Notification Time
