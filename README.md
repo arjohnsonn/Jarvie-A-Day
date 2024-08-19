@@ -8,4 +8,4 @@ Features:
 - Surprise Factor
 - Confetti on Reveal
 - Settings
--   Daily Notification Time
+  - Daily Notification Time
