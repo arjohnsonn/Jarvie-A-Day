@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ConfettiSwiftUI
+import UserNotifications
 
 struct ContentView: View {
     @State private var start: Bool = false
@@ -18,6 +19,8 @@ struct ContentView: View {
     @State private var buttonOpacity = 1
     
     @State private var confettiCount = 0
+    
+    @State private var displayAlert: Bool = false
     
     static var maxImages = 2
     let images = (1...maxImages).map { String($0) }
@@ -53,11 +56,22 @@ struct ContentView: View {
                 .bold()
                 .font(.system(size: 25))
                 .opacity(Double(buttonOpacity))
-            })
+            }
+            )
             .navigationBarItems(trailing: NavigationLink(destination: SettingsView()) {
                 Image(systemName: "gear")
                     .imageScale(.large)
             })
+        }
+        .onAppear {
+            requestNotificationAuthorization()
+        }
+        .alert(isPresented: $displayAlert) {
+            Alert(
+                title: Text("Notice"),
+                message: Text("Please re-enable notifications in Settings to receive daily notifications."),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     
@@ -70,6 +84,20 @@ struct ContentView: View {
             centerImage = randomImage
         }
     }
+    
+    public func requestNotificationAuthorization() {
+        // Ask for notification permissions
+           UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+               
+               if let error = error {
+                   print("Error requesting notification authorization: \(error.localizedDescription)")
+               }
+               
+               if !granted {
+                   displayAlert = true
+               }
+           }
+       }
     
     func openPress() {
         withAnimation(Animation.linear(duration: 0.1).repeatCount(40, autoreverses: true)) {
